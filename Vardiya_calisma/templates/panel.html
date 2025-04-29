@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Vardiya Paneli</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='panel.css') }}">
+</head>
+<body class="bg-light p-4">
+  <div class="container">
+    <h2 class="mb-4 text-center">Yönetici Paneli</h2>
+
+    <div class="d-flex justify-content-between align-items-end mb-3 flex-wrap gap-2">
+      <a href="/vardiya/ekle" class="btn btn-success">+ Yeni Vardiya Ekle</a>
+
+      <div class="d-flex gap-2">
+        <input type="text" class="form-control" id="calisanAra" placeholder="Çalışan Ara">
+        <select class="form-select" id="vardiyaTuru">
+          <option value="Hepsi">Tüm Türler</option>
+          <option value="Gündüz">Gündüz</option>
+          <option value="Gece">Gece</option>
+        </select>
+      </div>
+      
+
+      <a href="/" class="btn btn-danger">Çıkış Yap</a>
+    </div>
+
+    <table class="table table-bordered table-hover bg-white" id="vardiyaTablo">
+      <thead class="table-light">
+        <tr>
+          <th>Çalışan Adı</th>
+          <th>Başlangıç</th>
+          <th>Bitiş</th>
+          <th>Tür</th>
+          <th>İşlemler</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Ahmet Yılmaz</td>
+          <td>2025-04-22 08:00</td>
+          <td>2025-04-22 16:00</td>
+          <td>Gündüz</td>
+          <td>
+            <button class="btn btn-sm btn-warning">Düzenle</button>
+            <button class="btn btn-sm btn-danger">Sil</button>
+          </td>
+        </tr>      
+        <tr>
+          <td>Kadir Civelek</td>
+          <td>2025-04-25 08:00</td>
+          <td>2025-04-25 16:00</td>
+          <td>Gündüz</td>
+          <td>
+            <button class="btn btn-sm btn-warning">Düzenle</button>
+            <button class="btn btn-sm btn-danger">Sil</button>
+          </td>
+        </tr>   
+        <tr>
+          <td>Osman Can Varlık</td>
+          <td>2025-04-28 08:00</td>
+          <td>2025-04-28 16:00</td>
+          <td>Gece</td>
+          <td>
+            <button class="btn btn-sm btn-warning">Düzenle</button>
+            <button class="btn btn-sm btn-danger">Sil</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    const filtreVardiya = document.getElementById('vardiyaTuru');
+    const calisanAra = document.getElementById('calisanAra');
+    const satirlar = document.querySelectorAll('#vardiyaTablo tbody tr');
+
+    filtreVardiya.addEventListener('change', filtrele);
+    calisanAra.addEventListener('input', filtrele);
+
+    function filtrele() {
+      const vardiyaDegeri = filtreVardiya.value.toLowerCase();
+      const aramaDegeri = calisanAra.value.toLowerCase();
+
+      satirlar.forEach(satir => {
+        const calisanAdi = satir.cells[0].innerText.toLowerCase();
+        const vardiyaTuru = satir.cells[3].innerText.toLowerCase();
+
+        const uygun = 
+          (vardiyaDegeri === 'hepsi' || vardiyaTuru === vardiyaDegeri) &&
+          calisanAdi.includes(aramaDegeri);
+
+        satir.style.display = uygun ? '' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>
