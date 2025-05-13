@@ -7,13 +7,13 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='vardiya_ekle.css') }}">
 </head>
 <body class="bg-light p-5">
-  <div class="container" style="max-width: 600px;">
-    <h3 class="mb-4">🕒 Yeni Vardiya Ekle</h3>
+  <div class="container bg-white p-4 rounded shadow" style="max-width: 600px;">
+    <h3 class="mb-4 text-primary">🕒 Yeni Vardiya Ekle</h3>
     
     <form method="POST" action="/vardiya/ekle">
       <div class="mb-3">
         <label class="form-label">Çalışan Adı</label>
-        <input type="text" class="form-control" name="ad" required>
+        <input type="text" class="form-control" name="calisan_ad" required>
       </div>
 
       <div class="mb-3">
@@ -36,8 +36,8 @@
       </div>
 
       <div class="d-flex justify-content-between">
-        <a href="/panel" class="btn btn-secondary">← Geri Dön</a>
-        <a href="/panel" class="btn btn-primary">Kaydet</a>
+        <a href="/panel" class="btn btn-outline-secondary">← Geri Dön</a>
+        <button type="submit" class="btn btn-success">Kaydet</button>
       </div>
       
     </form>
