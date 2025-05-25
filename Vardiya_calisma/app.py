@@ -158,5 +158,12 @@ def test_db():
 with app.app_context():
     db.create_all()
 
-if __name__ == '__main__':
+if _name_ == '_main_':
+   with app.app_context():
+        db.create_all()
     app.run(debug=True)
+
+
+import os
+if _name_ == "_main_":
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
